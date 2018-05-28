@@ -30,6 +30,6 @@ f = open('/home/chicago/Salas/Registro.txt','a')
 f1 = open('/home/chicago/Salas/UsoSalas.csv', 'a')
 f.write('\n' + x + '\n' + y)
 f.close()
-f1.write('\n' + id + '\t' + t)
+f1.write('\n' + id + '\t' + min)
 f1.close()
 
