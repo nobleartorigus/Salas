@@ -16,14 +16,13 @@ GPIO.setup(led_pir_indicator,GPIO.OUT)
 
 try:
   while True:
-    x = GPIO.input(sensor_pir_input)
-
-    if x == 1:
+    pir_lecture = GPIO.input(sensor_pir_input)
+    if pir_lecture == 1:
       GPIO.output(led_pir_indicator,1)
     else:
       GPIO.output(led_pir_indicator,0)
     #y = time.strftime("%c")
-    print x
+    print pir_lecture
     time.sleep(0.2)
 
 except KeyboardInterrupt:
