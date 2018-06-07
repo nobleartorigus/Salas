@@ -1,5 +1,3 @@
-GNU nano 2.7.4                             File: Presence.py                                       
-
 from SensorPIR import SensorPIR
 from Camera import Camerashoot
 import time
@@ -32,4 +30,3 @@ f.write('\n' + x + '\n' + y)
 f.close()
 f1.write('\n' + id + '\t' + min)
 f1.close()
-
