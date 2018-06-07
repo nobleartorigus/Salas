@@ -1,32 +1,52 @@
+
 from SensorPIR import SensorPIR
-from Camera import Camerashoot
+import RPi.GPIO as GPIO
 import time
 
-
-x, y = SensorPIR()
-print(x, y)
+GPIO.setmode(GPIO.BOARD) #Physical pin counter
+led_pir_indicator = 11
 secs = 0
 min = 0
+#time_initiate_1_counting = 0
+#time_initiate_0_counting = 0
+time_total_1_counted = 0
+time_total_0_counted = 0
+GPIO.setup(led_pir_indicator, GPIO.OUT)
 #ID de sala 1, pendiente sistema para identificar IDs de salas diversas 
 id = 1
-while x == 1:
-        x, y = SensorPIR()
-        if secs != 10:
-                time.sleep(1)
-                secs += 1
-        time.sleep(60)
-        Camerashoot()
-        #Despues de 60 s se suma un minuto al contador y este toma una captura cada minuto mientras $
-        min += 1 
+try:
+	while True:
+		x, y = SensorPIR()
+		if x == 1:
+			time_total_1_counted += 1
+			#GPIO.output(led_pir_indicator, 1)
+			#time_initiate_1_counting = time.time()
+			#time_total_0_counted = time.time() - time_initiate_0_counting
+			#time_total_0_counted_int = int(time_total_0_counted)
+			if time_total_1_counted > 15:
+				GPIO.output(led_pir_indicator, 1)
+				time_total_0_counted = 0
 
-min = str(min)
-id = str(id)
-print('\n' + min)
-x = str(x)
-y = str(y)
-f = open('/home/chicago/Salas/Registro.txt','a')
-f1 = open('/home/chicago/Salas/UsoSalas.csv', 'a')
-f.write('\n' + x + '\n' + y)
-f.close()
-f1.write('\n' + id + '\t' + min)
-f1.close()
+		elif x == 0:
+			time_total_0_counted += 1
+			#GPIO.output(led_pir_indicator, 0)
+			#time_initiate_0_counting = time.time()
+			#time_total_1_counted = time.time() - time_initiate_1_counting
+			#time_total_1_counted_int = int(time_total_1_counted) 
+			if time_total_0_counted > 15:
+				GPIO.output(led_pir_indicator, 0)
+				time_total_1_counted = 0
+
+
+		x = str(x)
+		y = str(y)
+		id = str(id)
+		f1 = open('/home/chicago/Salas/UsoSalas.csv', 'a')
+		f1.write('\n' + id + '\t' + y + '\t' +  x)
+		f1.close()
+		time.sleep(1)
+
+
+except KeyboardInterrupt:
+  GPIO.cleanup()
+

@@ -5,7 +5,7 @@ import time
 def SensorPIR():
 	
 	GPIO.setmode(GPIO.BOARD)
-	PIR_PIN = 7
+	PIR_PIN = 40
 	GPIO.setup(PIR_PIN, GPIO.IN)
 	x = GPIO.input(PIR_PIN)
 	y = time.strftime("%c")
