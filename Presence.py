@@ -1,4 +1,4 @@
-
+#
 from SensorPIR import SensorPIR
 import RPi.GPIO as GPIO
 import time
@@ -17,8 +17,10 @@ id = 1
 try:
 	while True:
 		x, y = SensorPIR()
+#		print(x)
 		if x == 1:
 			time_total_1_counted += 1
+			print(str(time_total_1_counted)+' ON')
 			#GPIO.output(led_pir_indicator, 1)
 			#time_initiate_1_counting = time.time()
 			#time_total_0_counted = time.time() - time_initiate_0_counting
@@ -29,6 +31,7 @@ try:
 
 		elif x == 0:
 			time_total_0_counted += 1
+			print(str(time_total_0_counted) + ' off')
 			#GPIO.output(led_pir_indicator, 0)
 			#time_initiate_0_counting = time.time()
 			#time_total_1_counted = time.time() - time_initiate_1_counting
@@ -38,13 +41,13 @@ try:
 				time_total_1_counted = 0
 
 
-		x = str(x)
-		y = str(y)
-		id = str(id)
-		f1 = open('/home/chicago/Salas/UsoSalas.csv', 'a')
-		f1.write('\n' + id + '\t' + y + '\t' +  x)
-		f1.close()
-		time.sleep(1)
+#		x = str(x)
+#		y = str(y)
+#		id = str(id)
+#		f1 = open('/home/chicago/Salas/UsoSalas.csv', 'a')
+#		f1.write('\n' + id + '\t' + y + '\t' +  x)
+#		f1.close()
+		time.sleep(0.5)
 
 
 except KeyboardInterrupt:
