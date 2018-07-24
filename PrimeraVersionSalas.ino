@@ -4,7 +4,7 @@
 ESP8266WebServer server;
 int inpin = 0;
 //String url = "http://xdk-test-206419.appspot.com";
-String url = "http://webhook.site/c3f8d8f6-5beb-4a56-a1ca-44a0d15dcf3a";
+String url = "http://webhook.site/e4fd7b35-4b4e-49c2-9037-879a15e3ff9c";
 
 char* ssid = "Centraal-Comunidad";
 char* password = "hoyemprendo";
@@ -63,19 +63,19 @@ void post() {
     delay(1000);
     Serial.print("POST " + url + " HTTP/1.1\r\n" +
                  "Host: " + host + "\r\n" +
-                 "Content-Length: 60\r\n" +
+                 "Content-Length: 68\r\n" +
                  "Content-Type: application/json\r\n\r\n" +
-                 "{\n\"PIR5482\":1 ,\r\n"+
-                 "\"SALAID\":3 ,\r\n" +
-                 "\"msg\":fuerademipantano >:v\r\n}\r\n"); 
+                 "{\n\"Occupied\":1 ,\r\n"+
+                 "\"room_name\": Procope ,\r\n" +
+                 "\"sensor_name\": prueba\r\n}\r\n");
 
     client.print("POST " + url + " HTTP/1.1\r\n" +
                  "Host: " + host + "\r\n" +
-                 "Content-Length: 60\r\n" +
+                 "Content-Length: 68\r\n" +
                  "Content-Type: application/json\r\n\r\n" +
-                 "{\n\"PIR5482\":1 ,\r\n"+
-                 "\"SALAID\":3 ,\r\n" +
-                 "\"msg\":fuerademipantano >:v\r\n}\r\n"); 
+                 "{\n\"Occupied\":1 ,\r\n"+
+                 "\"room_name\": Procope ,\r\n" +
+                 "\"sensor_name\": prueba\r\n}\r\n"); 
     
     
 
