@@ -16,7 +16,7 @@ char* host = "35.161.143.162";
 const char index_html[] PROGMEM = {"<!DOCTYPE html>\n<html>\n<body>\n\n<h1>Obligame Prro >:v</h1>\n<p>Me obligo el prro >':v.</p>\n\n<form>\n\n<h1> Configuration Parameters </h1>\n\nRed: <br> \n<input type = \"text\" value = \"Centraal-Comunidad\">\n<br><br>\nPassword:<br> \n<input type = \"password\" value = \"hoyemprendo\">\n<br><br>\nURL: <br>\n<input type=\"url\">\n<br><br>\nHost: <br>\n<input type=\"text\">\n<br><br>\n<input type = \"submit\" value = \"Submit\">\n<input type = \"reset\" value = \"Reset\">\n\n</form>\n\n</body>\n</html>"};
 
 //Function declaration
-void post();
+//void post(char status);
 void get();
 void config();
 
@@ -44,20 +44,21 @@ void setup() {
 void loop() {
     server.handleClient();
     if(digitalRead(inpin) == 1){
-    post();
+    post(1);
     delay(3000);
     //get();
     delay(1000);
     }
     else {
       Serial.println("No hay presencia\r\n");
+      post(0);
     }
 
     delay(2000);
     
 }
 
-void post() {
+void post(int status) {
   Serial.print("Connecting to: ");
     Serial.print(host);
 
@@ -74,13 +75,13 @@ void post() {
                  "Host: " + host + "\r\n" +
                  "Content-Length: 61\r\n" +
                  "Content-Type: application/json\r\n\r\n" +
-                 "{\"occupied\":1, \"room_name\":\"Procope\", \"sensor_name\":\"prueba\"}\r\n");;
+                 "{\"occupied\":" + status + ", \"room_name\":\"Procope\", \"sensor_name\":\"prueba\"}\r\n");;
 
     client.print("POST " + url + " HTTP/1.1\r\n" +
                  "Host: " + host + "\r\n" +
                  "Content-Length: 61\r\n" +
                  "Content-Type: application/json\r\n\r\n" +
-                 "{\"occupied\":1, \"room_name\":\"Procope\", \"sensor_name\":\"prueba\"}");
+                 "{\"occupied\":" + status + ", \"room_name\":\"Procope\", \"sensor_name\":\"prueba\"}");
     
     
 
