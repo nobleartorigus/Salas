@@ -94,6 +94,7 @@ void setup() {
   previousMillis = 0;
 
   pinMode(PIR, INPUT);
+  pinMode(APMode, OUTPUT);
   
 	delay(1000);
 	Serial.begin(115200);
