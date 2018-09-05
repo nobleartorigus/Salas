@@ -19,6 +19,7 @@ char* host = "35.161.143.162";
 //char* host = "webhook.site";
 
 int PIR = 0;
+int APMode = 2;
 
 
 //RETCODE Lost conecction
@@ -253,6 +254,7 @@ void config_page() {
 //----------------------Configuration Mode------------
 
 void config_mode () {
+  digitalWrite(APMode, 1);
   Serial.println("");
   Serial.print("Configuring access point...");
   
